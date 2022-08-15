@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
+// Rsuite
+import "rsuite/dist/rsuite.min.css";
+import { Button } from "rsuite";
+
+// Framer Motion
+import { motion } from "framer-motion";
+
+// Pages
+import Home from "./pages/Home";
+
+// Components
+import Header from "./components/Header";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Button appearance="primary"> Hello world </Button> */}
+      <Header />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

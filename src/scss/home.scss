@@ -1,0 +1,16 @@
+@use "./c.scss";
+
+.main-home {
+    background-color: c.$purple-dark;
+    min-height: 100vh;
+    padding:5rem;
+}
+
+
+.container-card {
+    background-color: c.$purple-medium;
+    height:40rem;
+    width:30rem;
+   
+
+}
