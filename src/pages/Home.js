@@ -1,13 +1,21 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrophy } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrophy,
+  faRankingStar,
+  faCrown,
+  faGamepad,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faWindows,
+  faPlaystation,
+  faXbox,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const API_KEY = process.env.API_KEY;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,8 +51,70 @@ const Home = () => {
             <FontAwesomeIcon icon={faTrophy} className="icon-sidebar" />
             Best of the year
           </a>
-          <a href="#">Popular in 2021</a>
-          <a href="#">All time top 250</a>
+          <a href="#">
+            <FontAwesomeIcon icon={faRankingStar} className="icon-sidebar" />
+            Popular in 2021
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faCrown} className="icon-sidebar" />
+            All time top 250
+          </a>
+        </div>
+        <div className="category-sidebar">
+          <p>Platforms</p>
+
+          <a href="#">
+            <FontAwesomeIcon icon={faWindows} className="icon-sidebar" />
+            PC
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faPlaystation} className="icon-sidebar" />
+            Playstation 4
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faXbox} className="icon-sidebar" />
+            Xbox One
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faGamepad} className="icon-sidebar" />
+            Nintendo Switch
+          </a>
+        </div>
+        <div className="category-sidebar">
+          <p>Genres</p>
+
+          <a href="#">
+            <FontAwesomeIcon icon={faTrophy} className="icon-sidebar" />
+            Action
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faRankingStar} className="icon-sidebar" />
+            Strategy
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faCrown} className="icon-sidebar" />
+            RPG
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faCrown} className="icon-sidebar" />
+            Shooter
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faCrown} className="icon-sidebar" />
+            Adventure
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faCrown} className="icon-sidebar" />
+            Puzzle
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faCrown} className="icon-sidebar" />
+            Racing
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faCrown} className="icon-sidebar" />
+            Sport
+          </a>
         </div>
       </div>
       <div className="container-home">
