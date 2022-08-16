@@ -2,6 +2,19 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Home = () => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="main-home">
       <div className="container-home">
