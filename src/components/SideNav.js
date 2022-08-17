@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrophy,
@@ -10,16 +11,36 @@ import {
   faGun,
   faCompass,
   faPuzzlePiece,
+  faFlagCheckered,
+  faVolleyball,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faWindows,
   faPlaystation,
   faXbox,
+  faApple,
+  faAndroid,
 } from "@fortawesome/free-brands-svg-icons";
 
 const SideNav = () => {
+  const [height, setHeight] = useState(0);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    setHeight(ref.current.clientHeight);
+  }, []);
+
+  const delta = window.innerHeight - height;
+  // console.log(window.innerHeight);
+  // console.log(height);
   return (
-    <div className="sidenav">
+    <div className="sidenav" ref={ref} style={{ top: `${delta}px` }}>
+      <div className="category-sidebar">
+        <p>Home</p>
+      </div>
+      <div className="category-sidebar">
+        <p>Review</p>
+      </div>
       <div className="category-sidebar">
         <p>Top</p>
 
@@ -35,6 +56,9 @@ const SideNav = () => {
           <FontAwesomeIcon icon={faCrown} className="icon-sidebar" />
           All time top 250
         </a>
+      </div>
+      <div className="category-sidebar">
+        <p>All Games</p>
       </div>
       <div className="category-sidebar">
         <p>Platforms</p>
@@ -54,6 +78,14 @@ const SideNav = () => {
         <a href="#">
           <FontAwesomeIcon icon={faGamepad} className="icon-sidebar" />
           Nintendo Switch
+        </a>
+        <a href="#">
+          <FontAwesomeIcon icon={faApple} className="icon-sidebar" />
+          iOS
+        </a>
+        <a href="#">
+          <FontAwesomeIcon icon={faAndroid} className="icon-sidebar" />
+          Android
         </a>
       </div>
       <div className="category-sidebar">
@@ -82,6 +114,14 @@ const SideNav = () => {
         <a href="#">
           <FontAwesomeIcon icon={faPuzzlePiece} className="icon-sidebar" />
           Puzzle
+        </a>
+        <a href="#">
+          <FontAwesomeIcon icon={faFlagCheckered} className="icon-sidebar" />
+          Racing
+        </a>
+        <a href="#">
+          <FontAwesomeIcon icon={faVolleyball} className="icon-sidebar" />
+          Sports
         </a>
       </div>
     </div>

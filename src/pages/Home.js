@@ -1,5 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGamepad } from "@fortawesome/free-solid-svg-icons";
+import {
+  faWindows,
+  faPlaystation,
+  faXbox,
+  faApple,
+  faAndroid,
+} from "@fortawesome/free-brands-svg-icons";
 
 //import components
 import SideNav from "../components/SideNav";
@@ -16,7 +25,6 @@ const Home = () => {
         );
         setData(response.data);
         setIsLoading(false);
-        // console.log(response.data);
       } catch (error) {
         console.log(error.response);
       }
@@ -37,20 +45,60 @@ const Home = () => {
                 <img src={game.background_image} />
               </div>
               <div className="description-card">
-                {game.platforms.map((element, index) => {
-                  console.log(element.platform.id);
-                  return (
-                    <div key={index} className="platform-card">
-                      {/* <p>{platform.platforms}</p> */}
+                <div className="header-card">
+                  <div className="platform-card">
+                    {game.platforms.map((element, index) => {
+                      return (
+                        <p key={index} className="icon-platform-card">
+                          {element.platform.id === 4 ? (
+                            <FontAwesomeIcon
+                              icon={faWindows}
+                              className="icon-sidebar"
+                            />
+                          ) : element.platform.id === 187 && 18 ? (
+                            <FontAwesomeIcon
+                              icon={faPlaystation}
+                              className="icon-sidebar"
+                            />
+                          ) : element.platform.id === 1 && 186 ? (
+                            <FontAwesomeIcon
+                              icon={faXbox}
+                              className="icon-sidebar"
+                            />
+                          ) : element.platform.id === 7 ? (
+                            <FontAwesomeIcon
+                              icon={faGamepad}
+                              className="icon-sidebar"
+                            />
+                          ) : element.platform.id === 3 ? (
+                            <FontAwesomeIcon
+                              icon={faApple}
+                              className="icon-sidebar"
+                            />
+                          ) : (
+                            element.platform.id === 21 && (
+                              <FontAwesomeIcon
+                                icon={faAndroid}
+                                className="icon-sidebar"
+                              />
+                            )
+                          )}
+                        </p>
+                      );
+                    })}
+                  </div>
+                  {game.metacritic ? (
+                    <div className="rate-card">
+                      <p>{game.metacritic}</p>
                     </div>
-                  );
-                })}
+                  ) : null}
+                </div>
 
                 <div className="title-card">
                   <p>{game.name}</p>
                 </div>
-                <div className="rate-card"></div>
-                <div className="fav-card"></div>
+
+                {/* <div className="fav-card"></div> */}
               </div>
             </div>
           );

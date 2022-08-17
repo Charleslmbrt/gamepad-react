@@ -1,4 +1,8 @@
+import { useState, useEffect } from "react";
+
 const Header = () => {
+  const [search, setSearch] = useState("");
+
   return (
     <div className="container-header">
       <div className="content-logo">
@@ -6,7 +10,14 @@ const Header = () => {
       </div>
       <div className="content-header">
         <div className="search-header">
-          <input type="text" placeholder="search game" />
+          <input
+            type="text"
+            placeholder="Search games"
+            value={search}
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }}
+          />
         </div>
         <div className="nav-header">
           <ul>

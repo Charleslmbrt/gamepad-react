@@ -1,70 +1,18 @@
 @use "./c.scss";
 
-/* SIDEBAR */
-.sidenav {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 27rem; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 0; /* Stay on top */
-    top: 9rem; /* Stay at the top */
-    left: 0;
-    background-color: c.$black;
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 7rem;
- 
-  }
-
-  .category-sidebar {
-    padding: 0rem 5rem;
-    margin-bottom:2rem;
-
-    a {
-        text-decoration: none;
-        font-size: 1.6rem;
-        color: c.$white;
-        display: block;
-        padding: 1rem 0rem;
-      }
-
-      p{
-        font-size: 2.8rem;
-        font-weight:700;
-        color: c.$white;
-      }
-  }
-   
-  
-  /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-
-  .icon-sidebar {
-    color: c.$white;
-    margin-right:1rem;
-  }
-  
-  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 1rem;}
-  }
-
-
-
 /* CARD MODEL */
 .main-home {
-
+    display: flex;
     background-color: c.$black;
-    min-height: 100vh;
     padding:5rem;
 }
 
 .container-home {
     display: flex;
+    flex:7;
     flex-wrap: wrap;
     justify-content:space-between;
-    margin-left: 27rem; /* Same as the width of the sidebar */
+    // margin-left: 27rem; /* Same as the width of the sidebar */
 
 }
 
@@ -72,14 +20,15 @@
 .container-card {
     background-color: c.$purple-dark;
     border: solid 1px c.$purple-medium;
-    height:30rem;
-    min-width:23%;
+
+    padding:0rem 0rem 3rem 0rem;
+    width:23%;
     margin-top:3rem; 
     border-radius: 1rem;
   
     .img-card img {
         width:100%;
-        height:14rem;
+        height:16rem;
         object-fit: cover;
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
@@ -89,5 +38,40 @@
 
 .container-card:not(:nth-last-child(1)) {
     margin-right:0.5rem;
+}
+
+.header-card{
+  display: flex;
+  justify-content: space-between;
+  margin:1.5rem;
+  height:2rem;
+
+  .icon-platform-card {
+    font-size: 1.5rem;
+  }
+
+  .rate-card {
+    border: 1px solid green;
+    border-radius: 0.5rem;
+    color:c.$green;
+    height:3rem;
+    font-size: 1.5rem;
+    padding:0.5rem;
+  }
+}
+
+.platform-card {
+  display: flex;
+}
+
+.description-card {
+  padding:0.5rem;
+}
+
+.title-card {
+  color: c.$white;
+  padding:0rem 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
