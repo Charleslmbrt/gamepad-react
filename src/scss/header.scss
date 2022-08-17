@@ -10,6 +10,7 @@
     position: sticky;
     top: 0;
     border-bottom:1px solid c.$purple-medium;
+    z-index:2;
 }
 
 .content-logo {
@@ -25,7 +26,11 @@
 
 .content-header {
     display: flex;
-    align-items: center;
+align-items: center;
+
+width:120rem;
+justify-content: space-between;
+
     
 
     .nav-header {
@@ -39,16 +44,23 @@
         li{
             margin-left:2rem;
             letter-spacing: 0.1rem;
+            font-size: 1.2rem;
         }
     } 
 
-    .search-header input {
-        padding:1.5rem;
-        border-radius: 3rem;
-        border: none;
-        background-color: c.$purple-medium;
-        margin-right:3rem;
-        width:50rem;
+    .search-header {
+         width:70%;
+         margin:3rem;
+
+        input {
+            width:100%;
+            border: none;
+            padding:1.5rem;
+            background-color: c.$purple-medium;
+            border-radius: 3rem;
+      
+        }
     }
+ 
 
 }

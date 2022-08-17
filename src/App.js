@@ -1,13 +1,9 @@
 import "./App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useNavigate, Link } from "react-router-dom";
-
-// Rsuite
-import "rsuite/dist/rsuite.min.css";
-import { Button } from "rsuite";
+// import { useNavigate, Link } from "react-router-dom";
 
 // Framer Motion
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 
 // Pages
 import Home from "./pages/Home";

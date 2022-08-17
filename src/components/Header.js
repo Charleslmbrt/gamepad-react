@@ -1,8 +1,4 @@
 const Header = () => {
-  const styles = {
-    width: 400,
-  };
-
   return (
     <div className="container-header">
       <div className="content-logo">
