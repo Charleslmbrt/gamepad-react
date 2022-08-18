@@ -13,24 +13,42 @@ import {
 //import components
 import SideNav from "../components/SideNav";
 
-const Home = () => {
+const Home = ({ search }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [pageIndex, setPageIndex] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://gamepadbackend.herokuapp.com/"
+          `https://gamepadbackend.herokuapp.com/?search=${search}&page=${pageIndex}&page_size=30`
         );
         setData(response.data);
         setIsLoading(false);
+        // console.log(search);
       } catch (error) {
         console.log(error.response);
       }
     };
     fetchData();
+  }, [search, pageIndex]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", infiniteCheck);
+
+    return () => {
+      window.removeEventListener("scroll", infiniteCheck);
+    };
   }, []);
+
+  const infiniteCheck = () => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+    if (scrollHeight - scrollTop <= clientHeight) {
+      setPageIndex((pageIndex) => pageIndex + 1);
+    }
+  };
 
   return isLoading ? (
     <p>Loading</p>
@@ -38,16 +56,16 @@ const Home = () => {
     <div className="main-home">
       <SideNav />
       <div className="container-home">
-        {data.results.map((game, index) => {
+        {data.results?.map((game, index) => {
           return (
             <div key={index} className="container-card">
               <div className="img-card">
-                <img src={game.background_image} />
+                <img src={game.background_image} alt="game cover" />
               </div>
               <div className="description-card">
                 <div className="header-card">
                   <div className="platform-card">
-                    {game.platforms.map((element, index) => {
+                    {game.platforms?.map((element, index) => {
                       return (
                         <p key={index} className="icon-platform-card">
                           {element.platform.id === 4 ? (

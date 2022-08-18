@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
+// import { useNavigate, Link } from "react-router-dom";
 
-const Header = () => {
-  const [search, setSearch] = useState("");
-
+const Header = ({ search, setSearch }) => {
   return (
     <div className="container-header">
       <div className="content-logo">
         <p className="logo">GAMEPAD</p>
       </div>
+
       <div className="content-header">
         <div className="search-header">
           <input

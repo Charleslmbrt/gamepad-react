@@ -36,93 +36,93 @@ const SideNav = () => {
   return (
     <div className="sidenav" ref={ref} style={{ top: `${delta}px` }}>
       <div className="category-sidebar">
-        <p>Home</p>
+        <h2>Home</h2>
       </div>
       <div className="category-sidebar">
-        <p>Review</p>
+        <h2>Review</h2>
       </div>
       <div className="category-sidebar">
-        <p>Top</p>
+        <h2>Top</h2>
 
-        <a href="#">
+        <p>
           <FontAwesomeIcon icon={faTrophy} className="icon-sidebar" />
           Best of the year
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faRankingStar} className="icon-sidebar" />
           Popular in 2021
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faCrown} className="icon-sidebar" />
           All time top 250
-        </a>
+        </p>
       </div>
       <div className="category-sidebar">
-        <p>All Games</p>
+        <h2>All Games</h2>
       </div>
       <div className="category-sidebar">
-        <p>Platforms</p>
+        <h2>Platforms</h2>
 
-        <a href="#">
+        <p>
           <FontAwesomeIcon icon={faWindows} className="icon-sidebar" />
           PC
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faPlaystation} className="icon-sidebar" />
           Playstation 4
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faXbox} className="icon-sidebar" />
           Xbox One
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faGamepad} className="icon-sidebar" />
           Nintendo Switch
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faApple} className="icon-sidebar" />
           iOS
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faAndroid} className="icon-sidebar" />
           Android
-        </a>
+        </p>
       </div>
       <div className="category-sidebar">
-        <p>Genres</p>
+        <h2>Genres</h2>
 
-        <a href="#">
+        <p>
           <FontAwesomeIcon icon={faPersonRunning} className="icon-sidebar" />
           Action
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faChessKing} className="icon-sidebar" />
           Strategy
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faShieldHalved} className="icon-sidebar" />
           RPG
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faGun} className="icon-sidebar" />
           Shooter
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faCompass} className="icon-sidebar" />
           Adventure
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faPuzzlePiece} className="icon-sidebar" />
           Puzzle
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faFlagCheckered} className="icon-sidebar" />
           Racing
-        </a>
-        <a href="#">
+        </p>
+        <p>
           <FontAwesomeIcon icon={faVolleyball} className="icon-sidebar" />
           Sports
-        </a>
+        </p>
       </div>
     </div>
   );
