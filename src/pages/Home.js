@@ -29,9 +29,7 @@ const Home = ({ search }) => {
   const handlePageClick = (event) => {
     const newPage = (event.selected * gamesPerPage) % count;
     setPage(newPage);
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newPage}`
-    );
+    console.log(`page ${event.selected}, number of Games ${newPage}`);
   };
 
   useEffect(() => {
