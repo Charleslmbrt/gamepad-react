@@ -19,33 +19,29 @@ const Home = ({ search }) => {
   const [data, setData] = useState([]);
   const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(0);
-  // const [nextPage, setNextPage] = useState("");
-  // const [previousPage, setPreviousPage] = useState("");
+  const [page, setPage] = useState(1);
+  const [filtered, setFiltered] = useState([]);
+  const [activeGenre, setActiveGenre] = useState(0);
 
-  const gamesPerPage = 20;
-  const numberOfPagesVisited = page + gamesPerPage;
+  const gamesPerPage = 40;
+  // const numberOfPagesVisited = page + gamesPerPage;
   const totalPages = Math.ceil(count / gamesPerPage);
 
   const handlePageClick = (event) => {
-    const newPage = (event.selected * gamesPerPage) % count;
+    const newPage = event.selected + 1;
     setPage(newPage);
-    console.log(`page ${event.selected}, number of Games ${newPage}`);
+    // console.log(`page ${event.selected}, number of Games ${newPage}`);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://gamepadbackend.herokuapp.com/?search=${search}&page=${page}&page_size=20`
+          `https://gamepadbackend.herokuapp.com/?search=${search}&page=${page}&page_size=40`
         );
         setData(response.data.results);
+        setFiltered(response.data.results);
         setCount(response.data.count);
-        // setNextPage(response.data.next);
-        // setPreviousPage(response.data.previous);
-        // console.log(response.data.next);
-        // console.log(response.data.previous);
-
         setIsLoading(false);
       } catch (error) {
         console.log(error.response);
@@ -58,76 +54,77 @@ const Home = ({ search }) => {
     <p>Loading</p>
   ) : (
     <div className="main-home">
-      <SideNav />
-
+      <SideNav
+        data={data}
+        setFiltered={setFiltered}
+        activeGenre={activeGenre}
+        setActiveGenre={setActiveGenre}
+      />
+      {/* <Filters /> */}
       <div className="content-home">
-        {data
-          .slice(numberOfPagesVisited, numberOfPagesVisited + gamesPerPage)
-          .map((game, index) => {
-            // console.log(data.results);
-            return (
-              <div key={index} className="container-card">
-                <Filters />
-                <div className="img-card">
-                  <img src={game.background_image} alt="game cover" />
-                </div>
-                <div className="description-card">
-                  <div className="header-card">
-                    <div className="platform-card">
-                      {game.platforms?.map((element, index) => {
-                        return (
-                          <p key={index} className="icon-platform-card">
-                            {element.platform.id === 4 ? (
+        {filtered.map((game, index) => {
+          return (
+            <div key={index} className="container-card">
+              <div className="img-card">
+                <img src={game.background_image} alt="game cover" />
+              </div>
+              <div className="description-card">
+                <div className="header-card">
+                  <div className="platform-card">
+                    {game.platforms?.map((element, index) => {
+                      return (
+                        <p key={index} className="icon-platform-card">
+                          {element.platform.id === 4 ? (
+                            <FontAwesomeIcon
+                              icon={faWindows}
+                              className="icon-sidebar"
+                            />
+                          ) : element.platform.id === 187 && 18 ? (
+                            <FontAwesomeIcon
+                              icon={faPlaystation}
+                              className="icon-sidebar"
+                            />
+                          ) : element.platform.id === 1 && 186 ? (
+                            <FontAwesomeIcon
+                              icon={faXbox}
+                              className="icon-sidebar"
+                            />
+                          ) : element.platform.id === 7 ? (
+                            <FontAwesomeIcon
+                              icon={faGamepad}
+                              className="icon-sidebar"
+                            />
+                          ) : element.platform.id === 3 ? (
+                            <FontAwesomeIcon
+                              icon={faApple}
+                              className="icon-sidebar"
+                            />
+                          ) : (
+                            element.platform.id === 21 && (
                               <FontAwesomeIcon
-                                icon={faWindows}
+                                icon={faAndroid}
                                 className="icon-sidebar"
                               />
-                            ) : element.platform.id === 187 && 18 ? (
-                              <FontAwesomeIcon
-                                icon={faPlaystation}
-                                className="icon-sidebar"
-                              />
-                            ) : element.platform.id === 1 && 186 ? (
-                              <FontAwesomeIcon
-                                icon={faXbox}
-                                className="icon-sidebar"
-                              />
-                            ) : element.platform.id === 7 ? (
-                              <FontAwesomeIcon
-                                icon={faGamepad}
-                                className="icon-sidebar"
-                              />
-                            ) : element.platform.id === 3 ? (
-                              <FontAwesomeIcon
-                                icon={faApple}
-                                className="icon-sidebar"
-                              />
-                            ) : (
-                              element.platform.id === 21 && (
-                                <FontAwesomeIcon
-                                  icon={faAndroid}
-                                  className="icon-sidebar"
-                                />
-                              )
-                            )}
-                          </p>
-                        );
-                      })}
+                            )
+                          )}
+                        </p>
+                      );
+                    })}
+                  </div>
+                  {game.metacritic ? (
+                    <div className="rate-card">
+                      <p>{game.metacritic}</p>
                     </div>
-                    {game.metacritic ? (
-                      <div className="rate-card">
-                        <p>{game.metacritic}</p>
-                      </div>
-                    ) : null}
-                  </div>
+                  ) : null}
+                </div>
 
-                  <div className="title-card">
-                    <p>{game.name}</p>
-                  </div>
+                <div className="title-card">
+                  <p>{game.name}</p>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
         <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}

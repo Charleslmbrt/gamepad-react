@@ -22,17 +22,27 @@ import {
   faAndroid,
 } from "@fortawesome/free-brands-svg-icons";
 
-const SideNav = () => {
+const SideNav = ({ data, setFiltered, activeGenre, setActiveGenre }) => {
   const [height, setHeight] = useState(0);
   const ref = useRef(null);
 
   useEffect(() => {
     setHeight(ref.current.clientHeight);
   }, []);
-
   const delta = window.innerHeight - height;
-  // console.log(window.innerHeight);
-  // console.log(height);
+
+  useEffect(() => {
+    if (activeGenre === 0) {
+      setFiltered(data);
+      return;
+    }
+    const filtered = data.filter((game) => {
+      game.genres.includes(activeGenre);
+    });
+
+    setFiltered(filtered);
+  }, [activeGenre]);
+
   return (
     <div className="sidenav" ref={ref} style={{ top: `${delta}px` }}>
       <div className="category-sidebar">
@@ -91,11 +101,19 @@ const SideNav = () => {
       <div className="category-sidebar">
         <h2>Genres</h2>
 
-        <p>
+        <p
+          onClick={() => {
+            setActiveGenre(4);
+          }}
+        >
           <FontAwesomeIcon icon={faPersonRunning} className="icon-sidebar" />
           Action
         </p>
-        <p>
+        <p
+          onClick={() => {
+            setActiveGenre(10);
+          }}
+        >
           <FontAwesomeIcon icon={faChessKing} className="icon-sidebar" />
           Strategy
         </p>
