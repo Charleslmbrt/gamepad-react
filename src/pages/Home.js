@@ -13,17 +13,18 @@ import {
 
 //import components
 import SideNav from "../components/SideNav";
+import Filters from "../components/Filters";
 
 const Home = ({ search }) => {
   const [data, setData] = useState([]);
-  const [count, setCount] = useState(null);
+  const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
   // const [nextPage, setNextPage] = useState("");
   // const [previousPage, setPreviousPage] = useState("");
 
   const gamesPerPage = 20;
-  const numberOfGamesVisited = page * gamesPerPage;
+  const numberOfPagesVisited = page + gamesPerPage;
   const totalPages = Math.ceil(count / gamesPerPage);
 
   const handlePageClick = (event) => {
@@ -36,7 +37,7 @@ const Home = ({ search }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://gamepadbackend.herokuapp.com/?search=${search}`
+          `https://gamepadbackend.herokuapp.com/?search=${search}&page=${page}&page_size=20`
         );
         setData(response.data.results);
         setCount(response.data.count);
@@ -61,11 +62,12 @@ const Home = ({ search }) => {
 
       <div className="content-home">
         {data
-          .slice(numberOfGamesVisited, numberOfGamesVisited + gamesPerPage)
+          .slice(numberOfPagesVisited, numberOfPagesVisited + gamesPerPage)
           .map((game, index) => {
             // console.log(data.results);
             return (
               <div key={index} className="container-card">
+                <Filters />
                 <div className="img-card">
                   <img src={game.background_image} alt="game cover" />
                 </div>
