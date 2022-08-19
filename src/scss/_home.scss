@@ -7,12 +7,16 @@
     padding:5rem;
 }
 
-.container-home {
+
+
+.content-home {
     display: flex;
-    flex:7;
+    flex:6;
     flex-wrap: wrap;
     justify-content:space-between;
+    // border: solid 3px yellow;
     // margin-left: 27rem; /* Same as the width of the sidebar */
+
 
 }
 
@@ -74,4 +78,7 @@
   font-size: 2rem;
   font-weight: 700;
 }
+
+
+
 
