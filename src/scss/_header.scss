@@ -6,14 +6,17 @@
     display: flex;
     align-items: center;
     padding: 0 5rem;
-    justify-content: space-between;
+    // justify-content: space-between;
     position: sticky;
     top: 0;
     border-bottom:1px solid c.$purple-medium;
     z-index:2;
+
 }
 
 .content-logo {
+    flex:1;
+    // border: solid 1px blue;
     .logo {
         color:c.$white;
         font-size: 2rem;
@@ -24,27 +27,32 @@
 .content-header {
     display: flex;
     align-items: center;
-    width:120rem;
-    justify-content: space-between;
+    flex:6;
+    // width:120rem;
+    // justify-content: space-between;
+    
+
 
     .nav-header {
+        width:30%;
+          
         ul {
             display: flex;
-            align-items: center;
             color:c.$white;
+            justify-content: flex-end;
             
         } 
 
         li{
             margin-left:2rem;
             letter-spacing: 0.1rem;
-            font-size: 1.2rem;
+            font-size: 1.2rem;  
         }
     } 
 
     .search-header {
-         width:70%;
-         margin:3rem;
+      width:70%;
+      margin:3rem;
 
         input {
             width:100%;
@@ -55,6 +63,13 @@
             color:c.$white;
             font-size: 1.5rem;
         }
+
+        input:hover {
+            background-color: c.$white;
+            color:c.$black;
+            transition: all .3s ease-out;
+        }
+
     }
 
 

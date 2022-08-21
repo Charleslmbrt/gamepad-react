@@ -1,6 +1,6 @@
 // import { useNavigate, Link } from "react-router-dom";
 
-const Header = ({ search, setSearch }) => {
+const Header = ({ search, setSearch, data, count }) => {
   return (
     <div className="container-header">
       <div className="content-logo">
@@ -11,7 +11,7 @@ const Header = ({ search, setSearch }) => {
         <div className="search-header">
           <input
             type="text"
-            placeholder="Search games"
+            placeholder={`Search ${count} games`}
             value={search}
             onChange={(event) => {
               setSearch(event.target.value);

@@ -1,25 +1,17 @@
 @use "./c.scss";
 
 /* SIDEBAR */
+
 .sidenav {
-    // height: 100%; /* Full-height: remove this if you want "auto" height */
-    // width: 27rem; /* Set the width of the sidebar */
-    // position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 0; /* Stay on top */
-    // top: 9rem; /* Stay at the top */
-    // left: 0;
+    z-index: 0;
     background-color: c.$black;
-    // overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 2rem;
     position: sticky;
     align-self: flex-start;
     flex:1;
-  
- 
   }
 
   .category-sidebar {
-   
     margin-bottom:3rem;
 
     p {
@@ -28,21 +20,52 @@
         color: c.$white;
         display: block;
         margin: 1rem 0rem;
-        cursor: pointer;
+        cursor: pointer;     
+      }
+
+      p:hover {
+        color:c.$purple-light;
+        transition: all .3s ease;
+      }
+
+      p.active {
+        color:c.$purple-light;
+        font-weight: bold;
       }
 
       h2{
         font-size: 2.8rem;
         font-weight:700;
         color: c.$white;
+        cursor: pointer;
       }
+
+      h2:hover {
+        color:c.$purple-light;
+        transition: all .3s ease;
+
+      }
+
+      h2:active {
+        color:c.$purple-light;
+      }
+
+      h3 {
+        font-size: 2.8rem;
+        font-weight:700;
+        color: c.$white;
+      }
+      
   }
    
   
   /* When you mouse over the navigation links, change their color */
-  .sidenav p:hover {
-    color: #f1f1f1;
-  }
+  // .sidenav p {
+
+
+
+  // }
+
 
   .icon-sidebar {
     color: c.$white;

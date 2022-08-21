@@ -1,46 +1,37 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGamepad } from "@fortawesome/free-solid-svg-icons";
-import {
-  faWindows,
-  faPlaystation,
-  faXbox,
-  faApple,
-  faAndroid,
-} from "@fortawesome/free-brands-svg-icons";
+import { motion, AnimatePresence } from "framer-motion";
 
 //import components
 import SideNav from "../components/SideNav";
-import Filters from "../components/Filters";
+import Game from "../components/Game";
 
-const Home = ({ search }) => {
-  const [data, setData] = useState([]);
-  const [count, setCount] = useState(0);
+const Home = ({ search, data, setData, count, setCount }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
-  const [filtered, setFiltered] = useState([]);
+  // const [filtered, setFiltered] = useState([]);
   const [activeGenre, setActiveGenre] = useState(0);
+  const [activePlatform, setActivePlatform] = useState(0);
+  const [dates, setDates] = useState(null);
+  const [ordering, setOrdering] = useState(null);
 
   const gamesPerPage = 40;
-  // const numberOfPagesVisited = page + gamesPerPage;
   const totalPages = Math.ceil(count / gamesPerPage);
 
   const handlePageClick = (event) => {
     const newPage = event.selected + 1;
     setPage(newPage);
-    // console.log(`page ${event.selected}, number of Games ${newPage}`);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://gamepadbackend.herokuapp.com/?search=${search}&page=${page}&page_size=40`
+          `https://gamepadbackend.herokuapp.com/?search=${search}&page=${page}&page_size=40&genres=${activeGenre}&platforms=${activePlatform}&dates=${dates}&ordering=${ordering}`
         );
         setData(response.data.results);
-        setFiltered(response.data.results);
+        // setFiltered(response.data.results);
         setCount(response.data.count);
         setIsLoading(false);
       } catch (error) {
@@ -48,7 +39,7 @@ const Home = ({ search }) => {
       }
     };
     fetchData();
-  }, [search, page]);
+  }, [search, page, activeGenre, activePlatform, dates, ordering]);
 
   return isLoading ? (
     <p>Loading</p>
@@ -56,75 +47,24 @@ const Home = ({ search }) => {
     <div className="main-home">
       <SideNav
         data={data}
-        setFiltered={setFiltered}
+        // setFiltered={setFiltered}
         activeGenre={activeGenre}
         setActiveGenre={setActiveGenre}
+        activePlatform={activePlatform}
+        setActivePlatform={setActivePlatform}
+        dates={dates}
+        setDates={setDates}
+        ordering={ordering}
+        setOrdering={setOrdering}
       />
-      {/* <Filters /> */}
-      <div className="content-home">
-        {filtered.map((game, index) => {
-          return (
-            <div key={index} className="container-card">
-              <div className="img-card">
-                <img src={game.background_image} alt="game cover" />
-              </div>
-              <div className="description-card">
-                <div className="header-card">
-                  <div className="platform-card">
-                    {game.platforms?.map((element, index) => {
-                      return (
-                        <p key={index} className="icon-platform-card">
-                          {element.platform.id === 4 ? (
-                            <FontAwesomeIcon
-                              icon={faWindows}
-                              className="icon-sidebar"
-                            />
-                          ) : element.platform.id === 187 && 18 ? (
-                            <FontAwesomeIcon
-                              icon={faPlaystation}
-                              className="icon-sidebar"
-                            />
-                          ) : element.platform.id === 1 && 186 ? (
-                            <FontAwesomeIcon
-                              icon={faXbox}
-                              className="icon-sidebar"
-                            />
-                          ) : element.platform.id === 7 ? (
-                            <FontAwesomeIcon
-                              icon={faGamepad}
-                              className="icon-sidebar"
-                            />
-                          ) : element.platform.id === 3 ? (
-                            <FontAwesomeIcon
-                              icon={faApple}
-                              className="icon-sidebar"
-                            />
-                          ) : (
-                            element.platform.id === 21 && (
-                              <FontAwesomeIcon
-                                icon={faAndroid}
-                                className="icon-sidebar"
-                              />
-                            )
-                          )}
-                        </p>
-                      );
-                    })}
-                  </div>
-                  {game.metacritic ? (
-                    <div className="rate-card">
-                      <p>{game.metacritic}</p>
-                    </div>
-                  ) : null}
-                </div>
-
-                <div className="title-card">
-                  <p>{game.name}</p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+      <div className="container-home">
+        <motion.div layout className="content-home">
+          <AnimatePresence>
+            {data.map((game, index) => {
+              return <Game game={game} index={game.id} />;
+            })}
+          </AnimatePresence>
+        </motion.div>
         <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}
@@ -144,56 +84,3 @@ const Home = ({ search }) => {
 };
 
 export default Home;
-
-// const [pageIndex, setPageIndex] = useState(1);
-
-// useEffect(() => {
-//   const infiniteFetchData = async () => {
-//     try {
-//       const response = await axios.get(
-//         `https://gamepadbackend.herokuapp.com/?search=${search}&page=${pageIndex}&page_size=28`
-//         // `https://gamepadbackend.herokuapp.com/?search=${search}`
-//       );
-
-//       const DataReceived = [];
-
-//       data.results.forEach((element) => {
-//         DataReceived.push(element.background_image);
-//       });
-
-//       const newFreshState = [...data];
-
-//       let index = 0;
-//       for (let i = 0; i < 3; i++) {
-//         for (let j = 0; j < 10; j++) {
-//           newFreshState[i].push(DataReceived[index]);
-//           index++;
-//         }
-//       }
-
-//       setData(newFreshState);
-
-//       // setData(response.data);
-//       setIsLoading(false);
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   };
-//   infiniteFetchData();
-// }, [pageIndex]);
-
-// useEffect(() => {
-//   window.addEventListener("scroll", infiniteCheck);
-
-//   return () => {
-//     window.removeEventListener("scroll", infiniteCheck);
-//   };
-// }, []);
-
-// const infiniteCheck = () => {
-//   const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-//   if (scrollHeight - scrollTop <= clientHeight) {
-//     setPageIndex((pageIndex) => pageIndex + 1);
-//   }
-// };
