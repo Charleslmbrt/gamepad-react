@@ -2,7 +2,7 @@
 
 .container-header{
     height:9rem;
-    background-color: c.$purple-dark;
+    background-color: c.$black;
     display: flex;
     align-items: center;
     padding: 0 5rem;
@@ -57,10 +57,9 @@
         input {
             width:100%;
             border: none;
-            padding:1.5rem 2.5rem;
+            padding:1.5rem 6rem;
             background-color: c.$purple-medium;
             border-radius: 3rem;
-            color:c.$white;
             font-size: 1.5rem;
         }
 
@@ -70,8 +69,21 @@
             transition: all .3s ease-out;
         }
 
-    }
+        input:focus {
+            background-color: c.$white;
+            color:c.$black;
+            outline: none;
+        }
 
+        .icon-search-sidebar {
+            position: absolute;
+            color:c.$black;
+            top:3.5rem;
+            margin-left:2rem;
+            font-size: 2rem;
+        }
+
+    }
 
     ::placeholder{
         color:c.$black;

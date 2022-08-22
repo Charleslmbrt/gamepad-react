@@ -1,21 +1,31 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import { motion, AnimatePresence } from "framer-motion";
 
 //import components
 import SideNav from "../components/SideNav";
-import Game from "../components/Game";
+import Card from "../components/Card";
 
-const Home = ({ search, data, setData, count, setCount }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  // const [filtered, setFiltered] = useState([]);
-  const [activeGenre, setActiveGenre] = useState(0);
-  const [activePlatform, setActivePlatform] = useState(0);
-  const [dates, setDates] = useState(null);
-  const [ordering, setOrdering] = useState(null);
-
+const Home = ({
+  search,
+  data,
+  setData,
+  count,
+  setCount,
+  isLoading,
+  setIsLoading,
+  page,
+  setPage,
+  activeGenre,
+  setActiveGenre,
+  activePlatform,
+  setActivePlatform,
+  dates,
+  setDates,
+  ordering,
+  setOrdering,
+}) => {
   const gamesPerPage = 40;
   const totalPages = Math.ceil(count / gamesPerPage);
 
@@ -29,6 +39,7 @@ const Home = ({ search, data, setData, count, setCount }) => {
       try {
         const response = await axios.get(
           `https://gamepadbackend.herokuapp.com/?search=${search}&page=${page}&page_size=40&genres=${activeGenre}&platforms=${activePlatform}&dates=${dates}&ordering=${ordering}`
+          // `http://localhost:3000/?search=${search}&page=${page}&page_size=40&genres=${activeGenre}&platforms=${activePlatform}&dates=${dates}&ordering=${ordering}`
         );
         setData(response.data.results);
         // setFiltered(response.data.results);
@@ -39,7 +50,17 @@ const Home = ({ search, data, setData, count, setCount }) => {
       }
     };
     fetchData();
-  }, [search, page, activeGenre, activePlatform, dates, ordering]);
+  }, [
+    search,
+    page,
+    activeGenre,
+    activePlatform,
+    dates,
+    ordering,
+    setCount,
+    setData,
+    setIsLoading,
+  ]);
 
   return isLoading ? (
     <p>Loading</p>
@@ -61,7 +82,7 @@ const Home = ({ search, data, setData, count, setCount }) => {
         <motion.div layout className="content-home">
           <AnimatePresence>
             {data.map((game, index) => {
-              return <Game game={game} index={game.id} />;
+              return <Card game={game} index={game.id} />;
             })}
           </AnimatePresence>
         </motion.div>

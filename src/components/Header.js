@@ -1,4 +1,5 @@
-// import { useNavigate, Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ search, setSearch, data, count }) => {
   return (
@@ -9,6 +10,10 @@ const Header = ({ search, setSearch, data, count }) => {
 
       <div className="content-header">
         <div className="search-header">
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            className="icon-search-sidebar"
+          />
           <input
             type="text"
             placeholder={`Search ${count} games`}

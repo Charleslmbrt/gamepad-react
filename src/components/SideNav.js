@@ -110,6 +110,9 @@ const SideNav = ({
         <h2
           onClick={() => {
             setActiveGenre(0);
+            setActivePlatform(0);
+            setDates("");
+            setOrdering("");
           }}
         >
           All Games

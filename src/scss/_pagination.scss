@@ -16,14 +16,14 @@
         padding: 10px;
         margin: 8px;
         border-radius: 5px;
-        border: 1px solid red;
-        color: red;
+        border: 1px solid #643ed6;
+        color:#643ed6;
         cursor: pointer;
       }
       
     a:hover {
         color: white;
-        background-color: red;
+        background-color: #643ed6;
       }
 
   }
@@ -32,13 +32,13 @@
   
   .navigationActive a {
     color: white;
-    background-color: red;
+    background-color:#643ed6;
   }
   
   .navigationDisabled a {
     color: grey;
-    background-color: rgb(206, 206, 206);
-    border: 1px solid grey;
+    background-color:  #28283a ;
+    border: 1px solid #28283a;
     cursor: not-allowed;
 
 
