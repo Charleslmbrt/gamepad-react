@@ -12,11 +12,10 @@ import {
 
 const Card = ({ game, index }) => {
   return (
-    <Link to="/game/:id">
+    <Link to={`/game/${game.id}`} key={index}>
       <motion.div
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 1 }}
-        key={index}
         animate={{ opacity: 1 }}
         initial={{ opacity: 0 }}
         exit={{ opacity: 0 }}

@@ -14,6 +14,7 @@ import Header from "./components/Header";
 function App() {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
+  const [dataGameSeries, setDataGameSeries] = useState([]);
   const [count, setCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -58,6 +59,8 @@ function App() {
               <Game
                 data={data}
                 setData={setData}
+                dataGameSeries={dataGameSeries}
+                setDataGameSeries={setDataGameSeries}
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
               />

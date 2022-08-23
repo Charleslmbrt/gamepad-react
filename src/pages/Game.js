@@ -1,14 +1,26 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFolder, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faFolder, faPlus, faGamepad } from "@fortawesome/free-solid-svg-icons";
+import {
+  faWindows,
+  faPlaystation,
+  faXbox,
+  faApple,
+  faAndroid,
+} from "@fortawesome/free-brands-svg-icons";
 
 import SideNav from "../components/SideNav";
+import Sanitized from "../components/Sanitized";
+import Card from "../components/Card";
 
 const Game = ({
   data,
   setData,
+  dataGameSeries,
+  setDataGameSeries,
   isLoading,
   setIsLoading,
   activeGenre,
@@ -29,7 +41,6 @@ const Game = ({
           `https://gamepadbackend.herokuapp.com/game/${id}`
           // `http://localhost:3000/game/${id}`
         );
-        console.log(id);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -39,7 +50,24 @@ const Game = ({
     fetchGame();
   }, [setData, id, setIsLoading]);
 
-  return (
+  useEffect(() => {
+    const fetchGameSeries = async () => {
+      try {
+        const response = await axios.get(
+          `https://gamepadbackend.herokuapp.com/game/${id}/game-series`
+        );
+        setDataGameSeries(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    fetchGameSeries();
+  }, [setDataGameSeries, id, setIsLoading]);
+
+  return isLoading ? (
+    <p>Loading</p>
+  ) : (
     <div className="main-game">
       <SideNav
         data={data}
@@ -57,11 +85,47 @@ const Game = ({
         <div className="content-game">
           <div className="left-game">
             <div className="platform-game">
-              <FontAwesomeIcon icon={faFolder} className="icon-platform" />
-              <FontAwesomeIcon icon={faFolder} className="icon-platform" />
-              <FontAwesomeIcon icon={faFolder} className="icon-platform" />
+              {data.platforms?.map((element, index) => {
+                return (
+                  <p key={element.platform.id} className="icon-platform-card">
+                    {element.platform.id === 4 ? (
+                      <FontAwesomeIcon
+                        icon={faWindows}
+                        className="icon-platform"
+                      />
+                    ) : element.platform.id === 187 && 18 ? (
+                      <FontAwesomeIcon
+                        icon={faPlaystation}
+                        className="icon-platform"
+                      />
+                    ) : element.platform.id === 1 && 186 ? (
+                      <FontAwesomeIcon
+                        icon={faXbox}
+                        className="icon-platform"
+                      />
+                    ) : element.platform.id === 7 ? (
+                      <FontAwesomeIcon
+                        icon={faGamepad}
+                        className="icon-platform"
+                      />
+                    ) : element.platform.id === 3 ? (
+                      <FontAwesomeIcon
+                        icon={faApple}
+                        className="icon-platform"
+                      />
+                    ) : (
+                      element.platform.id === 21 && (
+                        <FontAwesomeIcon
+                          icon={faAndroid}
+                          className="icon-platform"
+                        />
+                      )
+                    )}
+                  </p>
+                );
+              })}
             </div>
-            <div className="title-game">Elder Scroll Online</div>
+            <div className="title-game">{data.name}</div>
             <div className="buttons-game">
               <div className="button-collection-game">
                 <div className="text-collection-game">
@@ -82,16 +146,7 @@ const Game = ({
             <div className="about-game">
               <p className="title-about-game">About</p>
               <p className="text-about-game">
-                The Golden Order has been broken. Rise, Tarnished, and be guided
-                by grace to brandish the power of the Elden Ring and become an
-                Elden Lord in the Lands Between. <br />
-                <br />
-                In the Lands Between ruled by Queen Marika the Eternal, the
-                Elden Ring, the source of the Erdtree, has been shattered.
-                Marika's offspring, demigods all, claimed the shards of the
-                Elden Ring known as the Great Runes, and the mad taint of their
-                newfound strength triggered a war: The Shattering. A war that
-                meant abandonment by the Greater Will.
+                <Sanitized html={data.description} />
               </p>
             </div>
             <div className="details-game">
@@ -99,34 +154,36 @@ const Game = ({
                 <div className="platforms-game">
                   <p className="title-details-game">Platforms</p>
                   <p className="text-details-game">
-                    PlayStation 4, Xbox One, Xbox Series S/X, PlayStation 5, PC
+                    {data.platforms?.map((element, index) => {
+                      return (
+                        <p
+                          key={element.platform.id}
+                          className="text-details-game-platforms"
+                        >
+                          {`${element.platform.name}, `}
+                        </p>
+                      );
+                    })}
                   </p>
                 </div>
                 <div className="genre-game">
                   <p className="title-details-game">Genre</p>
                   <p className="text-details-game">Action, RPG</p>
                 </div>
-                <div className="developer-game">
-                  <p className="title-details-game">Developer</p>
-                  <p className="text-details-game">From Software</p>
-                </div>
               </div>
               <div className="right-details-game">
-                <div className="metascore-game">
-                  <p className="title-details-game">Metascore</p>
-                  <p className="text-details-game">
-                    PlayStation 4, Xbox One, Xbox Series S/X, PlayStation 5, PC
-                  </p>
-                </div>
+                {data.metacritic ? (
+                  <div className="metascore-game">
+                    <p className="title-details-game">Metascore</p>
+                    <div className="rate-card-game">
+                      <p>{data.metacritic}</p>
+                    </div>
+                  </div>
+                ) : null}
+
                 <div className="release-game">
                   <p className="title-details-game">Release date</p>
-                  <p className="text-details-game">Feb 25, 2022</p>
-                </div>
-                <div className="publisher-game">
-                  <p className="title-details-game">Publisher</p>
-                  <p className="text-details-game">
-                    Bandai Namco Entertainment, FromSoftware
-                  </p>
+                  <p className="text-details-game">{data.released}</p>
                 </div>
               </div>
             </div>
@@ -138,7 +195,14 @@ const Game = ({
         </div>
 
         <div className="like-games">
-          <p className="title-like-games">Games like Elder Scroll Online</p>
+          <p className="title-like-games">Games like {data.name}</p>
+          <motion.div layout className="content-home">
+            <AnimatePresence>
+              {dataGameSeries.results.map((game, index) => {
+                return <Card game={game} index={game.id} />;
+              })}
+            </AnimatePresence>
+          </motion.div>
         </div>
         <div className="review-games">
           <p className="title-review-games">Reviews</p>

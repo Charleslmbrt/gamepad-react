@@ -1,9 +1,5 @@
 @use "./c.scss";
 
-// .main-card {
-  
-// }
-
 .container-card {
     background-color: c.$purple-dark;
     border: solid 1px c.$purple-medium;
@@ -11,6 +7,7 @@
     width:100%; 
     border-radius: 1rem;
     cursor: pointer;
+    height:100%;
   
     .img-card img {
         width:100%;
@@ -60,3 +57,4 @@
   font-size: 2rem;
   font-weight: 700;
 }
+
