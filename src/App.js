@@ -55,7 +55,12 @@ function App() {
           <Route
             path="/game/:id"
             element={
-              <Game data={data} setData={setData} isLoading={isLoading} />
+              <Game
+                data={data}
+                setData={setData}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+              />
             }
           />
         </Routes>

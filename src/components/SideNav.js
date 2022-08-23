@@ -62,7 +62,8 @@ const SideNav = ({
   // }, [activeGenre]);
 
   return (
-    <div className="sidenav" ref={ref} style={{ top: `${delta}px` }}>
+    // <div className="sidenav" ref={ref} style={{ top: `${delta}px` }}>
+    <div className="sidenav" ref={ref}>
       <Link to="/">
         <div className="category-sidebar">
           <h2>Home</h2>
